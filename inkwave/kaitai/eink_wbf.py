@@ -3,7 +3,7 @@
 from pkg_resources import parse_version
 import kaitaistruct
 from kaitaistruct import KaitaiStruct, KaitaiStream, BytesIO
-from enum import Enum
+from enum import IntEnum
 
 
 if parse_version(kaitaistruct.__version__) < parse_version('0.9'):
@@ -570,7 +570,7 @@ class EinkWbf(KaitaiStruct):
 
     class Header(KaitaiStruct):
 
-        class FplPlatform(Enum):
+        class FplPlatform(IntEnum):
             matrix_2_0 = 0
             matrix_2_1 = 1
             matrix_2_3_matrix_vixplex_100 = 2
@@ -582,7 +582,7 @@ class EinkWbf(KaitaiStruct):
             matrix_vizplex_220e = 8
             unkn_09 = 9
 
-        class FplSize(Enum):
+        class FplSize(IntEnum):
             r_5_0_inch = 0
             r_6_0_inch = 1
             r_6_1_inch = 2
@@ -599,12 +599,12 @@ class EinkWbf(KaitaiStruct):
             r_9_7_inch_1200x825 = 97
             r_9_7_inch_1600x1200 = 99
 
-        class FplRate(Enum):
+        class FplRate(IntEnum):
             r_50_hz = 80
             r_60_hz = 96
             r_85_hz = 133
 
-        class RunType(Enum):
+        class RunType(IntEnum):
             baseline = 0
             test_or_trial = 1
             production = 2
@@ -624,7 +624,7 @@ class EinkWbf(KaitaiStruct):
             n = 16
             unkn_11_likely_o = 17
 
-        class TuningBias(Enum):
+        class TuningBias(IntEnum):
             standard = 0
             increased_ds_blooming_v110_v110e = 1
             increased_ds_blooming_v220_v220e = 2
@@ -633,7 +633,7 @@ class EinkWbf(KaitaiStruct):
             gc16_fast_gl16_fast = 5
             unknown_06 = 6
 
-        class WaveformType(Enum):
+        class WaveformType(IntEnum):
             wx = 0
             wy = 1
             wp = 2
@@ -665,7 +665,7 @@ class EinkWbf(KaitaiStruct):
             bd = 76
             ae = 80
 
-        class Mode(Enum):
+        class Mode(IntEnum):
             init = 0
             du = 1
             gc16 = 2
@@ -679,7 +679,7 @@ class EinkWbf(KaitaiStruct):
             gl4 = 10
             gl16_inv = 11
 
-        class MfgCode(Enum):
+        class MfgCode(IntEnum):
             unkn_04 = 4
             unkn_0e = 14
             unkn_30 = 48
@@ -729,13 +729,13 @@ class EinkWbf(KaitaiStruct):
             self.waveform_type = KaitaiStream.resolve_enum(EinkWbf.Header.WaveformType, self._io.read_u1())
             self.fpl_size = KaitaiStream.resolve_enum(EinkWbf.Header.FplSize, self._io.read_u1())
             self.mfg_code = KaitaiStream.resolve_enum(EinkWbf.Header.MfgCode, self._io.read_u1())
-            if self.waveform_type.value >= EinkWbf.Header.WaveformType.wr.value:
+            if self.waveform_type >= EinkWbf.Header.WaveformType.wr:
                 self.waveform_revision = self._io.read_u1()
 
-            if self.waveform_type.value <= EinkWbf.Header.WaveformType.wj.value:
+            if self.waveform_type <= EinkWbf.Header.WaveformType.wj:
                 self.waveform_tuning_bias = KaitaiStream.resolve_enum(EinkWbf.Header.TuningBias, self._io.read_u1())
 
-            if  ((EinkWbf.Header.WaveformType.wj.value < self.waveform_type.value) and (self.waveform_type.value < EinkWbf.Header.WaveformType.wr.value)) :
+            if  ((EinkWbf.Header.WaveformType.wj < self.waveform_type) and (self.waveform_type < EinkWbf.Header.WaveformType.wr)) :
                 self.waveform_tuning_bias_or_rev_or_unkn = self._io.read_u1()
 
             self.fpl_rate = KaitaiStream.resolve_enum(EinkWbf.Header.FplRate, self._io.read_u1())
