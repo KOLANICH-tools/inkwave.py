@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.2.0", "wheel", "setuptools_scm[toml]>=3.4.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inkwave"
+authors = [{name = "KOLANICH"}]
+description = "A python port of inkwave"
+readme = "ReadMe.md"
+keywords = ["wbf", "wrf", "waveform", "eink", "e-ink", "epd", "epdx", "inkwave"]
+license = {text = "Unlicense"}
+classifiers = [
+	"Programming Language :: Python",
+	"Programming Language :: Python :: 3",
+	"Development Status :: 4 - Beta",
+	"Environment :: Other Environment",
+	"Intended Audience :: Developers",
+	"License :: OSI Approved",
+	"License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+	"Operating System :: OS Independent",
+	"Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.4"
+dependencies = ["plumbum"] # @ https://github.com/tomerfiliba/plumbum
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/KOLANICH-tools/inkwave.py"
+
+[project.scripts]
+inkwave = "inkwave.__main__:MainCLI.run"
+
+[tool.setuptools]
+zip-safe = true
+include-package-data = false
+
+[tool.setuptools.packages]
+find = {namespaces = false}
+
+[tool.setuptools_scm]
