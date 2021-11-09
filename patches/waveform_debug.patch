@@ -1,0 +1,54 @@
+From 497da9af2e1a169e9c6aafe25951bec5227fb888 Mon Sep 17 00:00:00 2001
+From: KOLANICH <kolan_n@mail.ru>
+Date: Mon, 8 Nov 2021 20:17:39 +0300
+Subject: [PATCH] This patch adds some tracing to KS-generates source in order
+ to test and debug the KS-based implementation.
+
+---
+ inkwave/kaitai/eink_wbf.py | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/inkwave/kaitai/eink_wbf.py b/inkwave/kaitai/eink_wbf.py
+index 53d3505..8f459a9 100644
+--- a/inkwave/kaitai/eink_wbf.py
++++ b/inkwave/kaitai/eink_wbf.py
+@@ -49,6 +49,7 @@ class EinkWbf(KaitaiStruct):
+         self._parent = _parent
+         self._root = _root if _root else self
+         self._read()
++        self.debug = False
+ 
+     def _read(self):
+         self.header = EinkWbf.Header(self._io, self, self._root)
+@@ -339,11 +340,21 @@ class EinkWbf(KaitaiStruct):
+                             self.k = k
+                             self._read()
+ 
++                        def pp(self, *args, **kwargs):
++                            if self._root.debug and self.k >= 0:
++                                print(*args, **kwargs)
++
+                         def _read(self):
+                             if not self.is_end_of_stream:
+                                 self.current_byte = self._io.read_u1()
++                                if self._root.debug:
++                                    print('{}, {}'.format(self._io.pos() - 1, hex(self.current_byte)[2:]))
++                                if not self.is_terminator:
++                                    self.pp('s', (self.s.s0, self.s.s1, self.s.s2, self.s.s3), self.k)
+                             if self.should_read_count:
+                                 self.count_read = self._io.read_u1()
++                            if not self.is_terminator:
++                                self.pp('count {:d}'.format(self.count), self.k)
+ 
+                         @property
+                         def is_first(self):
+@@ -886,4 +897,4 @@ class EinkWbf(KaitaiStruct):
+         self._io.seek(0)
+         self._m_wav_addrs_external = eink_wbf_wav_addrs_collection.EinkWbfWavAddrsCollection(self._root, self._io)
+         self._io.seek(_pos)
+-        return self._m_wav_addrs_external if hasattr(self, '_m_wav_addrs_external') else None
+\ No newline at end of file
++        return self._m_wav_addrs_external if hasattr(self, '_m_wav_addrs_external') else None
+-- 
+2.32.0
+

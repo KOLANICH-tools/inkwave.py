@@ -38,10 +38,13 @@ See [the `dep5` file](./.reuse/dep5) for the info on:
 
 Building
 --------
-* build a wheel: `python3 -m build -nwx`
+* obtain and install [`kaitaiStructCompile.py`](https://github.com/kaitaiStructCompile/kaitaiStructCompile.py) with `patch` extra.
+* build a wheel: `python3 -m build -nwx`. `kaitaiStructCompile` would deals with the rest automatically. It itself would compile the spec into `ksy`, apply the patches and fix the enums.
 
 Limitations and unsolved mysteries
 ----------------------------------
+* https://github.com/kaitai-io/kaitai_struct/issues/815 . Overcome by `fixEnums` postprocessor.
+* The spec is currently not expressed entirely in KS, as the original code takes 2 passes, the first pass creates the state (`wav_addrs` array, you must pass it to `eink_wbf::temp_range` as a param of type `eink_wbf_wav_addrs_collection` (see the python file for the example of its impl)) used by the second pass. I don't beleive the format was really designed like that and I feel like it can be possible to get rid of the first pass and express the format entirely in KS, but it has not yet been done.
 * The code within `inkwave` looks unnecessary complex, and this complexity has been transfered to this spec. I feel like it can be simplified a lot, but it has not yet been done.
 * `bits_per_pixel`
 * `mysterious_offset`

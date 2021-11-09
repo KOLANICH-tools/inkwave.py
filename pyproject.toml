@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.2.0", "wheel", "setuptools_scm[toml]>=3.4.3"]
+requires = ["setuptools>=61.2.0", "wheel", "setuptools_scm[toml]>=3.4.3", "kaitaiStructCompile[toml]"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -38,3 +38,23 @@ include-package-data = false
 find = {namespaces = false}
 
 [tool.setuptools_scm]
+
+
+[tool.kaitai.repos."https://github.com/KOLANICH/kaitai_struct_formats.git"."eink_wbf"]
+update = true
+search = false
+localPath = "kaitai_struct_formats" # rel to pyproject.toml dir
+outputDir = "inkwave/kaitai" # rel to localPath
+#inputDir = "hardware"
+
+[tool.kaitai.repos."https://github.com/KOLANICH/kaitai_struct_formats.git"."eink_wbf".formats.eink_wbf]
+path = "hardware/eink_wbf.ksy"
+
+# cannot import this one, because of https://github.com/kaitai-io/kaitai_struct/issues/295
+# fortunately it works fine as an opaque
+[tool.kaitai.repos."https://github.com/KOLANICH/kaitai_struct_formats.git"."eink_wbf".formats.bcd]
+path = "common/bcd.ksy"
+
+[tool.kaitai.repos."https://github.com/KOLANICH/kaitai_struct_formats.git"."eink_wbf".formats.eink_wbf.postprocess]
+fixEnums = []
+applyPatches = ["patches/waveform_debug.patch"]
