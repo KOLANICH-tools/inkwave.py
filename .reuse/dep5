@@ -1,0 +1,16 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: inkwave
+Upstream-Contact: Marc Juul <marc@juul.io>
+Source: https://github.com/fread-ink/inkwave
+
+Files: inkwave patches ReadMe.md
+Copyright: 2020-2021 KOLANICH
+Copyright: 2018, 2021 Marc Juul
+Copyright: 2005-2017 Amazon Technologies, Inc.
+Copyright: 2004-2013 Freescale Semiconductor, Inc.
+License: GPL-2.0-only
+Disclaimer: E Ink is a registered trademark of the E Ink Corporation. Neither the E Ink Corporation, nor Freescale Semiconductor Inc. nor Amazon Technologies Inc are in any way affiliated with fread nor inkwave (according to the statement in inkwave repo) nor this git project nor any of the authors of this project nor of inkwave and neither fread nor inkwave nor this git project is in any way endorsed by any of these organizations.
+
+Files: tests .gitignore .editorconfig .gitmodules .github .reuse .gitlab-ci.yml Code_Of_Conduct.md MANIFEST.in pyproject.toml setup.cfg
+Copyright: 2021 KOLANICH
+License: Unlicense
