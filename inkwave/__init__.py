@@ -13,10 +13,13 @@ from itertools import takewhile
 from pathlib import Path
 from typing import Dict, List, Mapping, Optional, Union
 from zlib import crc32
+from warnings import warn
 
 import kaitaistruct
 
 from .kaitai.eink_wbf import EinkWbf
+
+warn("We have moved from M$ GitHub to https://codeberg.org/KOLANICH-tools/inkwave.py , read why on https://codeberg.org/KOLANICH/Fuck-GuanTEEnomo .")
 
 class uint(int):
 	def __init__(self, v: Union[int, "uint"]) -> None:
