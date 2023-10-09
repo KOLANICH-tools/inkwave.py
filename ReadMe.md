@@ -3,6 +3,7 @@ inkwave.py
 [wheel (GHA via `nightly.link`)](https://nightly.link/KOLANICH-tools/inkwave.py/workflows/CI/master/inkwave-0.CI-py3-none-any.whl)
 [![GitHub Actions](https://github.com/KOLANICH-tools/inkwave.py/workflows/CI/badge.svg)](https://github.com/KOLANICH-tools/inkwave.py/actions/)
 [![Libraries.io Status](https://img.shields.io/librariesio/github/KOLANICH-tools/inkwave.py.svg)](https://libraries.io/github/KOLANICH-tools/inkwave.py)
+[![Code style: antiflash](https://img.shields.io/badge/code%20style-antiflash-FFF.svg)](https://codeberg.org/KOLANICH-tools/antiflash.py)
 
 This is my rewrite of [`inkwave`](https://github.com/fread-ink/inkwave) into Python in order make it easier for me to create and debug a [Kaitai Struct spec](https://github.com/KOLANICH-specs/kaitai_struct_formats/blob/eink_wbf/hardware/eink_wbf.ksy) for `wbf` format.
 
