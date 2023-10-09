@@ -25,7 +25,7 @@ dependencies = ["plumbum"] # @ https://github.com/tomerfiliba/plumbum
 dynamic = ["version"]
 
 [project.urls]
-Homepage = "https://github.com/KOLANICH-tools/inkwave.py"
+Homepage = "https://codeberg.org/KOLANICH-tools/inkwave.py"
 
 [project.scripts]
 inkwave = "inkwave.__main__:MainCLI.run"
@@ -40,21 +40,21 @@ find = {namespaces = false}
 [tool.setuptools_scm]
 
 
-[tool.kaitai.repos."https://github.com/KOLANICH/kaitai_struct_formats.git"."eink_wbf"]
+[tool.kaitai.repos."https://codeberg.org/KOLANICH/kaitai_struct_formats.git"."eink_wbf"]
 update = true
 search = false
 localPath = "kaitai_struct_formats" # rel to pyproject.toml dir
 outputDir = "inkwave/kaitai" # rel to localPath
 #inputDir = "hardware"
 
-[tool.kaitai.repos."https://github.com/KOLANICH/kaitai_struct_formats.git"."eink_wbf".formats.eink_wbf]
+[tool.kaitai.repos."https://codeberg.org/KOLANICH/kaitai_struct_formats.git"."eink_wbf".formats.eink_wbf]
 path = "hardware/eink_wbf.ksy"
 
 # cannot import this one, because of https://github.com/kaitai-io/kaitai_struct/issues/295
 # fortunately it works fine as an opaque
-[tool.kaitai.repos."https://github.com/KOLANICH/kaitai_struct_formats.git"."eink_wbf".formats.bcd]
+[tool.kaitai.repos."https://codeberg.org/KOLANICH/kaitai_struct_formats.git"."eink_wbf".formats.bcd]
 path = "common/bcd.ksy"
 
-[tool.kaitai.repos."https://github.com/KOLANICH/kaitai_struct_formats.git"."eink_wbf".formats.eink_wbf.postprocess]
+[tool.kaitai.repos."https://codeberg.org/KOLANICH/kaitai_struct_formats.git"."eink_wbf".formats.eink_wbf.postprocess]
 fixEnums = []
 applyPatches = ["patches/waveform_debug.patch"]

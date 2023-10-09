@@ -5,7 +5,7 @@ inkwave.py
 [![Libraries.io Status](https://img.shields.io/librariesio/github/KOLANICH-tools/inkwave.py.svg)](https://libraries.io/github/KOLANICH-tools/inkwave.py)
 [![Code style: antiflash](https://img.shields.io/badge/code%20style-antiflash-FFF.svg)](https://codeberg.org/KOLANICH-tools/antiflash.py)
 
-This is my rewrite of [`inkwave`](https://github.com/fread-ink/inkwave) into Python in order make it easier for me to create and debug a [Kaitai Struct spec](https://github.com/KOLANICH-specs/kaitai_struct_formats/blob/eink_wbf/hardware/eink_wbf.ksy) for `wbf` format.
+This is my rewrite of [`inkwave`](https://github.com/fread-ink/inkwave) into Python in order make it easier for me to create and debug a [Kaitai Struct spec](https://codeberg.org/KOLANICH-specs/kaitai_struct_formats/blob/eink_wbf/hardware/eink_wbf.ksy) for `wbf` format.
 
 [`inkwave`](https://github.com/fread-ink/inkwave) is a command-line utility for converting `.wbf` to `.wrf` files and displaying meta-data information from `.wbf` and `.wrf` files in a human readable format. See its README for more details.
 
@@ -16,7 +16,7 @@ Structure of the repo
 
 The repo has 2 branches:
 
-* `master` contains the code based on [my spec](https://github.com/KOLANICH-specs/kaitai_struct_formats/blob/eink_wbf/hardware/eink_wbf.ksy) in [Kaitai Struct](https://github.com/kaitai-io/kaitai_struct) language.
+* `master` contains the code based on [my spec](https://codeberg.org/KOLANICH-specs/kaitai_struct_formats/blob/eink_wbf/hardware/eink_wbf.ksy) in [Kaitai Struct](https://github.com/kaitai-io/kaitai_struct) language.
 * `ported` contains `inkwave` code manually rewritten from C into Python. It works much faster and with less overhead than the code based on a pure KS-based spec.
 
 
@@ -39,7 +39,7 @@ See [the `dep5` file](./.reuse/dep5) for the info on:
 
 Building
 --------
-* obtain and install [`kaitaiStructCompile.py`](https://github.com/kaitaiStructCompile/kaitaiStructCompile.py) with `patch` extra.
+* obtain and install [`kaitaiStructCompile.py`](https://codeberg.org/kaitaiStructCompile/kaitaiStructCompile.py) with `patch` extra.
 * build a wheel: `python3 -m build -nwx`. `kaitaiStructCompile` would deals with the rest automatically. It itself would compile the spec into `ksy`, apply the patches and fix the enums.
 
 Limitations and unsolved mysteries
@@ -61,7 +61,7 @@ In order to test this implementation (as a part of testing Kaitai-based `inkwave
     * extracted from devices firmwares (https://github.com/ReFirmLabs/binwalk is extremily helpful for that, so are the other more specialized tools. If there is no explicit file in the unpacked dir structure, it is likely that blobs of `wbf` format are stored in the firmware for that device. It may be likely that `rkf` format is used.
     * dumped from chips using https://github.com/julbouln/ice40_eink_controller/tree/master/utils/wbf_dump
 
-* obtain and compile [modified `inkwave`](https://github.com/KOLANICH-tools/inkwave/tree/private) with additional tracing
+* obtain and compile [modified `inkwave`](https://codeberg.org/KOLANICH-tools/inkwave/tree/private) with additional tracing
 * `find ./test_files/ -name "*.wbf" -print0 | parallel -0 ./tests/convert.sh;` - it would generate traces for the KS-based python impl and C one. They must be equal.
 * `find ./test_files/ -name "*.wbf_c.txt" -exec ./tests/compare.sh {} \;` - it would compare them and print any discrepancies.
 
